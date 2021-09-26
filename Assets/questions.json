@@ -1,0 +1,22 @@
+﻿[
+    {
+        "tag": "User",
+        "title": "Who would you like to report?",
+        "description": "Please type their in-game name and optionally their Discord username."
+    },
+    {
+        "tag": "Reason",
+        "title": "What would you like to report them for?",
+        "description": "E.g. harassment, cheating, exploiting, etc."
+    },
+    {
+        "tag": "Description",
+        "title": "Describe what happened",
+        "description": "Please type a detailed explanation of what happened."
+    },
+    {
+        "tag": "Proof",
+        "title": "If available, please send proof",
+        "description": "Please send image links in one message"
+    }
+]

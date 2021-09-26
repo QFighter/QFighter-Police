@@ -1,0 +1,19 @@
+﻿{
+    "token": "",
+
+    "prefixes": [ "." ],
+
+    "currently": "watching",
+    "playing_status": "over the community",
+    "status": "dnd",
+
+    "guild_id": 0,
+    "server_status_channel": 0,
+    "report_channel": 0,
+
+    "mod_chat": 0,
+    "mod_chat_message": "",
+
+    "server_ip": "127.0.0.1",
+    "server_port": 1337
+}
