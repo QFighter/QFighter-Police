@@ -47,7 +47,7 @@ namespace QFighterPolice
         {
             using var tcpClient = new TcpClient();
             var result = tcpClient.BeginConnect((string)config["server_ip"], (int)config["server_port"], null, null);
-            return result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
+            return result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3));
         }
     }
 }
