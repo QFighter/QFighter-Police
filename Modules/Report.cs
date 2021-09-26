@@ -108,8 +108,7 @@ namespace QFighterPolice
                 return;
             else if (confirm)
             {
-                var msg = "**__Report__**\n" +
-                    $"**Reported by:** {_user.Mention} ({_user.Id})\n\n";
+                var msg = $"**__New report by__** {_user.Mention}\n\n";
 
                 foreach (var answeredQuestion in answeredQuestions)
                     msg += $"**{answeredQuestion.Question.Tag}:** {answeredQuestion.Answer}\n";
