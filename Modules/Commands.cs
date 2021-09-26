@@ -8,9 +8,5 @@ namespace QFighterPolice.Modules
         [Command("help")]
         public async Task Help()
             => await ReplyAsync("Type `.report` in my DMs to report a player!");
-
-        [Command("ping")]
-        public async Task Ping()
-            => await ReplyAsync("Pong!");
     }
 }
