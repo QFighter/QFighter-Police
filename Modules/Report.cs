@@ -108,7 +108,8 @@ namespace QFighterPolice
                 return;
             else if (confirm)
             {
-                var msg = "**__Report__**\n\n";
+                var msg = "**__Report__**\n" +
+                    $"**Reported by:** {_user.Mention} ({_user.Id})\n\n";
 
                 foreach (var answeredQuestion in answeredQuestions)
                     msg += $"**{answeredQuestion.Question.Tag}:** {answeredQuestion.Answer}\n";
@@ -117,7 +118,8 @@ namespace QFighterPolice
                 ulong guildId = (ulong)config["guild_id"];
                 ulong channelId = (ulong)config["report_channel"];
 
-                await _client.GetGuild(guildId).GetTextChannel(channelId).SendMessageAsync(msg);
+                var reportMsg =  await _client.GetGuild(guildId).GetTextChannel(channelId).SendMessageAsync(msg);
+                await reportMsg.AddReactionAsync(new Emoji("✅"));
 
                 _embed.WithTitle("Success");
                 _embed.WithDescription("Your report has been submitted successfully.");
