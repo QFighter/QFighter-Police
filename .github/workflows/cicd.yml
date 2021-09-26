@@ -1,0 +1,18 @@
+image: debian:latest
+
+stages:
+  - deploy-master
+  - deploy-staging
+
+deploy-master:
+  stage: deploy-master
+  only:
+    - master
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - ssh -o StrictHostKeyChecking=no vacefron@$SSH_IP -p $SSH_PORT 'bash ~/run_scripts/update_qfighter_police.sh'
