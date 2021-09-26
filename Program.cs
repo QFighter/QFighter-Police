@@ -49,7 +49,8 @@ namespace QFighterPolice
                 {
                     LogLevel = LogSeverity.Info,
                     DefaultRunMode = RunMode.Async,
-                    CaseSensitiveCommands = false
+                    CaseSensitiveCommands = false,
+                    IgnoreExtraArgs = true
                 }))
                 .AddSingleton<EventHandlingService>()
                 .AddSingleton(new InteractivityConfig { DefaultTimeout = TimeSpan.FromHours(1) })
