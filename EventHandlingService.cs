@@ -72,7 +72,7 @@ namespace QFighterPolice
         private void StartTimer()
         {
             var ping = new Ping();
-            var timer = new Timer(TimeSpan.FromSeconds(15).TotalMilliseconds) { AutoReset = true };
+            var timer = new Timer(TimeSpan.FromSeconds(20).TotalMilliseconds) { AutoReset = true };
             timer.Elapsed += async (s, e) => await ping.PingServerAsync(_client);
             timer.Start();
         }
