@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-using Newtonsoft.Json.Linq;
 using Discord.WebSocket;
+using Newtonsoft.Json.Linq;
 
 namespace QFighterPolice
 {
@@ -14,7 +14,7 @@ namespace QFighterPolice
         {
             JObject config = ConfigManager.GetConfig();
 
-            _previousOnlineStatus = BeginConnect(config);
+            _previousOnlineStatus = TryConnect(config);
         }
 
         public async Task PingServerAsync(DiscordSocketClient client)
@@ -26,7 +26,7 @@ namespace QFighterPolice
             var guild = client.GetGuild(guildId);
             var channel = guild.GetTextChannel(channelId);
 
-            bool success = BeginConnect(config);
+            bool success = TryConnect(config);
 
             if (success && !_previousOnlineStatus)
                 await channel.SendMessageAsync("__**Server status**__ <:miublush2:845314172480782406>\nOnline 🟢");
@@ -43,11 +43,20 @@ namespace QFighterPolice
             _previousOnlineStatus = success;
         }
 
-        private static bool BeginConnect(JObject config)
-        {
+        private static bool TryConnect(JObject config, uint attempts = 5)
+        {            
             using var tcpClient = new TcpClient();
-            var result = tcpClient.BeginConnect((string)config["server_ip"], (int)config["server_port"], null, null);
-            return result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3));
+            bool success = false;
+
+            for (int i = 0; i < attempts && !success; i++)
+            {
+                var result = tcpClient.BeginConnect((string)config["server_ip"], (int)config["server_port"], null, null);
+                success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3));
+
+                Logger.LogMessage($"Server pinged. Attempt {i + 1} {(success ? "successful" : "failed")}.");
+            }
+
+            return success;
         }
     }
 }
