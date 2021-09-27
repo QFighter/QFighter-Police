@@ -17,7 +17,7 @@ namespace QFighterPolice
         private readonly InteractivityService _interactivity;
         private readonly string _prefix;
 
-        private readonly EmbedBuilder _embed = new ();
+        private readonly EmbedBuilder _embed = new();
 
         private IUserMessage _botMsg;
 
@@ -114,10 +114,8 @@ namespace QFighterPolice
                     msg += $"**{answeredQuestion.Question.Tag}:** {answeredQuestion.Answer}\n";
 
                 JObject config = ConfigManager.GetConfig();
-                ulong guildId = (ulong)config["guild_id"];
-                ulong channelId = (ulong)config["report_channel"];
 
-                var reportMsg =  await _client.GetGuild(guildId).GetTextChannel(channelId).SendMessageAsync(msg);
+                var reportMsg =  await _client.GetGuild((ulong)config["guild_id"]).GetTextChannel((ulong)config["report_channel"]).SendMessageAsync(msg);
                 await reportMsg.AddReactionAsync(new Emoji("✅"));
 
                 _embed.WithTitle("Success");
