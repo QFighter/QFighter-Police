@@ -16,6 +16,6 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0
+        dotnet-version: 5.0.*
     - name: Update
       run: /home/${{ secrets.USERNAME }}/run_scripts/update_qfighter_police.sh
