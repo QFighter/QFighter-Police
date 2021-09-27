@@ -27,14 +27,14 @@ namespace QFighterPolice
 
             bool success = TryConnect(config);
 
-            var emote = success ? "<:miublush2:845314172480782406>" : "<:miuscream3:845316873662496838>";
+            var header = "__**Server status update**__ " + (success ? "<:miublush2:845314172480782406>" : "<:miuscream3:845316873662496838>");
             var body = $"**Timestamp:** <t:{unixTimeNow}>\n**Status:** {(success ? "Online 🟢" : "Offline 🔴")}";
 
             if (success && !_previousOnlineStatus)
-                await channel.SendMessageAsync($"__**Server status update**__ {emote}\n\n{body}");
+                await channel.SendMessageAsync($"{header}\n\n{body}");
             else if (!success && _previousOnlineStatus)
             {
-                await channel.SendMessageAsync($"__**Server status update**__ {emote}\n\n{body}");
+                await channel.SendMessageAsync($"{header}\n\n{body}");
 
                 var modChatMessage = (string)config["mod_chat_message"];
 
