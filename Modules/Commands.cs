@@ -11,6 +11,6 @@ namespace QFighterPolice.Modules
 
         [Command("ping")]
         public async Task Ping()
-            => await ReplyAsync($"Pong! ({Context.Client.Latency} ms)");
+            => await ReplyAsync($":ping_pong: Pong! ({Context.Client.Latency} ms)");
     }
 }
