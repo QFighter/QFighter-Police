@@ -21,18 +21,20 @@ namespace QFighterPolice
         {
             JObject config = ConfigManager.GetConfig();
 
-            ulong guildId = (ulong)config["guild_id"];
-            ulong channelId = (ulong)config["server_status_channel"];
-            var guild = client.GetGuild(guildId);
-            var channel = guild.GetTextChannel(channelId);
+            var guild = client.GetGuild((ulong)config["guild_id"]);
+            var channel = guild.GetTextChannel((ulong)config["server_status_channel"]);
+            long unixTimeNow = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
             bool success = TryConnect(config);
 
+            var emote = success ? "<:miublush2:845314172480782406>" : "<:miuscream3:845316873662496838>";
+            var body = $"**Timestamp:** <t:{unixTimeNow}>\n**Status:** {(success ? "Online 🟢" : "Offline 🔴")}";
+
             if (success && !_previousOnlineStatus)
-                await channel.SendMessageAsync("__**Server status**__ <:miublush2:845314172480782406>\nOnline 🟢");
+                await channel.SendMessageAsync($"__**Server status update**__ {emote}\n\n{body}");
             else if (!success && _previousOnlineStatus)
             {
-                await channel.SendMessageAsync("__**Server status**__ <:miuscream3:845316873662496838>\nOffline 🔴");
+                await channel.SendMessageAsync($"__**Server status update**__ {emote}\n\n{body}");
 
                 var modChatMessage = (string)config["mod_chat_message"];
 
@@ -44,7 +46,7 @@ namespace QFighterPolice
         }
 
         private static bool TryConnect(JObject config, uint attempts = 5)
-        {            
+        {
             using var tcpClient = new TcpClient();
             bool success = false;
 
