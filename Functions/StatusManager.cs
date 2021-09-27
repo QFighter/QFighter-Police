@@ -27,7 +27,7 @@ namespace QFighterPolice
                 };
 
                 await client.SetStatusAsync(userStatus);
-                Console.WriteLine($"{DateTime.Now.TimeOfDay:hh\\:mm\\:ss} | Online status set | {userStatus}");
+                Logger.LogMessage($"Online status set to {userStatus}");
             }
 
             if (!string.IsNullOrEmpty(currently) && !string.IsNullOrEmpty(statusText))
@@ -41,7 +41,7 @@ namespace QFighterPolice
                 };
 
                 await client.SetGameAsync(statusText, type: activity);
-                Console.WriteLine($"{DateTime.Now.TimeOfDay:hh\\:mm\\:ss} | Playing status set | {activity}: {statusText}");
+                Logger.LogMessage($"Playing status set to {activity}: {statusText}");
             }
         }
     }

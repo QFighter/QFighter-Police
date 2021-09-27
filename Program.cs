@@ -18,7 +18,7 @@ namespace QFighterPolice
         {
             using var services = ConfigureServices();
 
-            Console.WriteLine("QFighter Police clocking in...");
+            Logger.LogMessage("QFighter Police clocking in...");
 
             var client = services.GetRequiredService<DiscordSocketClient>();
 
@@ -60,7 +60,7 @@ namespace QFighterPolice
 
         private Task Log(LogMessage log)
         {
-            Console.WriteLine(log.ToString());
+            Console.WriteLine($"[{DateTime.UtcNow:HH:mm:ss}] {log.Message}");
             return Task.CompletedTask;
         }
     }
