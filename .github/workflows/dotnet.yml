@@ -1,0 +1,19 @@
+name: remote ssh command
+on:
+  push:
+    branches: [ master ]
+    
+jobs:
+
+  build:
+    name: Update
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using ssh key
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        script: ~/run_scripts/update_qfighter_police.sh
