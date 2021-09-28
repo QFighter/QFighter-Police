@@ -5,9 +5,10 @@ using Discord;
 using Discord.WebSocket;
 using Interactivity;
 using Newtonsoft.Json.Linq;
+using QFighterPolice.Functions;
 using QFighterPolice.Models;
 
-namespace QFighterPolice
+namespace QFighterPolice.Modules
 {
     public class Report
     {

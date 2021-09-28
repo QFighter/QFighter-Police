@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QFighterPolice
+namespace QFighterPolice.Functions
 {
     public static class Logger
     {

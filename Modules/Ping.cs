@@ -3,8 +3,9 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using Discord.WebSocket;
 using Newtonsoft.Json.Linq;
+using QFighterPolice.Functions;
 
-namespace QFighterPolice
+namespace QFighterPolice.Modules
 {
     public class Ping
     {
