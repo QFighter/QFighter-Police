@@ -3,7 +3,7 @@ using Discord.WebSocket;
 using System;
 using System.Threading.Tasks;
 
-namespace QFighterPolice
+namespace QFighterPolice.Functions
 {
     public static class ReactionConfirm
     {

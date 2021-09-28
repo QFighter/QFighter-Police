@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using QFighterPolice.Models;
 
-namespace QFighterPolice
+namespace QFighterPolice.Functions
 {
     public static class ConfigManager
     {

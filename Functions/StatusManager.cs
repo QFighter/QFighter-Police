@@ -1,10 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using Newtonsoft.Json.Linq;
 
-namespace QFighterPolice
+namespace QFighterPolice.Functions
 {
     public static class StatusManager
     {

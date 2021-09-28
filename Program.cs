@@ -6,6 +6,7 @@ using Discord.WebSocket;
 using Interactivity;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Linq;
+using QFighterPolice.Functions;
 
 namespace QFighterPolice
 {
