@@ -41,7 +41,7 @@ namespace QFighterPolice.Modules
                     $"Here you go. You can update the questions by editing this JSON file and sending it using `{Context.Message.GetPrefix().Prefix}questions upload`");
             }
 
-            [Command("upload"), Priority(1)]
+            [Command("upload"), Alias("update"), Priority(1)]
             public async Task UploadQuestions()
             {
                 if (!await CheckPermissions())
