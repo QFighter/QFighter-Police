@@ -24,18 +24,14 @@ namespace QFighterPolice.Modules
 
             var guild = client.GetGuild((ulong)config["guild_id"]);
             var channel = guild.GetTextChannel((ulong)config["server_status_channel"]);
-            long unixTimeNow = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
             bool success = TryConnect(config);
 
-            var header = "__**Server status update**__ " + (success ? "<:miublush2:845314172480782406>" : "<:miuscream3:845316873662496838>");
-            var body = $"**Timestamp:** <t:{unixTimeNow}>\n**Status:** {(success ? "Online 🟢" : "Offline 🔴")}";
-
             if (success && !_previousOnlineStatus)
-                await channel.SendMessageAsync($"{header}\n\n{body}");
+                await MessageManager.SendStatusUpdateMessageAsync(channel, success);
             else if (!success && _previousOnlineStatus)
             {
-                await channel.SendMessageAsync($"{header}\n\n{body}");
+                await MessageManager.SendStatusUpdateMessageAsync(channel, success);
 
                 var modChatMessage = (string)config["mod_chat_message"];
 
