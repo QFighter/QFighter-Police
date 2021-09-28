@@ -39,9 +39,10 @@ namespace QFighterPolice
             if (rawMessage.Author.IsBot || rawMessage is not SocketUserMessage message)
                 return;
 
-            int argPos = 0;
+            var getPrefix = message.GetPrefix();
 
-            string prefix = message.GetPrefix();
+            string prefix = getPrefix.Prefix;
+            int argPos = getPrefix.argPos;
 
             if (prefix != null && message.Content == $"{prefix}report" && !_reportingUsers.Contains(message.Author.Id) && message.Channel is SocketDMChannel channel)
             {

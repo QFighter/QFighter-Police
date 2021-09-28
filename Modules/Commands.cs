@@ -38,7 +38,7 @@ namespace QFighterPolice.Modules
                     return;
 
                 await Context.Channel.SendFileAsync("Assets/questions.json",
-                    $"Here you go. You can update the questions by editing this JSON file and sending it using `{Context.Message.GetPrefix()}questions upload`");
+                    $"Here you go. You can update the questions by editing this JSON file and sending it using `{Context.Message.GetPrefix().Prefix}questions upload`");
             }
 
             [Command("upload")]
