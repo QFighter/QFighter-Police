@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Timers;
@@ -8,8 +7,8 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Interactivity;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using QFighterPolice.Functions;
+using QFighterPolice.Modules;
 
 namespace QFighterPolice
 {
@@ -42,9 +41,7 @@ namespace QFighterPolice
 
             int argPos = 0;
 
-            JObject config = ConfigManager.GetConfig();
-            string[] prefixes = JsonConvert.DeserializeObject<string[]>(config["prefixes"].ToString());
-            string prefix = prefixes.FirstOrDefault(x => message.HasStringPrefix(x, ref argPos));
+            string prefix = message.GetPrefix();
 
             if (prefix != null && message.Content == $"{prefix}report" && !_reportingUsers.Contains(message.Author.Id) && message.Channel is SocketDMChannel channel)
             {
