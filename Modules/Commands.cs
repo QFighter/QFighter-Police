@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -21,7 +22,17 @@ namespace QFighterPolice.Modules
 
         [Command("ping")]
         public async Task Ping()
-            => await ReplyAsync($":ping_pong: Pong! ({Context.Client.Latency} ms)");
+        {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var msg = await ReplyAsync("Loading...");
+
+            stopwatch.Stop();
+
+            await msg.ModifyAsync(x => x.Content = $":ping_pong: Pong!\n**WS:** {Context.Client.Latency} ms\n**REST:** {stopwatch.ElapsedMilliseconds} ms");
+
+        }
 
         [RequireOwner]
         [Command("updatetest")]
