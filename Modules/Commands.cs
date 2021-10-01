@@ -26,11 +26,13 @@ namespace QFighterPolice.Modules
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var msg = await ReplyAsync("Loading...");
+            var content = $":ping_pong: Pong!\n**WS:** {Context.Client.Latency} ms\n**REST:** ";
+
+            var msg = await ReplyAsync(content + "Loading...");
 
             stopwatch.Stop();
 
-            await msg.ModifyAsync(x => x.Content = $":ping_pong: Pong!\n**WS:** {Context.Client.Latency} ms\n**REST:** {stopwatch.ElapsedMilliseconds} ms");
+            await msg.ModifyAsync(x => x.Content = content + $"{stopwatch.ElapsedMilliseconds} ms");
 
         }
 
