@@ -42,7 +42,7 @@ namespace QFighterPolice.Modules
             _previousOnlineStatus = success;
         }
 
-        private static bool TryConnect(JObject config, uint attempts = 5)
+        private bool TryConnect(JObject config, uint attempts = 5)
         {
             try
             {
