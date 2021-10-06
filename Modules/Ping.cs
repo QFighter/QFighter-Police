@@ -59,9 +59,10 @@ namespace QFighterPolice.Modules
 
                 return success;
             }
-            catch
+            catch (Exception e)
             {
-                return false;
+                Logger.LogMessage($"Ping error: {e.Message}");
+                return _previousOnlineStatus;
             }
         }
     }
