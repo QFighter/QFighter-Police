@@ -33,7 +33,6 @@ namespace QFighterPolice.Modules
             stopwatch.Stop();
 
             await msg.ModifyAsync(x => x.Content = content + $"{stopwatch.ElapsedMilliseconds} ms");
-
         }
 
         [RequireOwner]
