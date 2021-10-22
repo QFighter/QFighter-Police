@@ -54,6 +54,8 @@ namespace QFighterPolice.Modules
                     var result = tcpClient.BeginConnect((string)config["server_ip"], (int)config["server_port"], null, null);
                     success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3));
 
+                    tcpClient.EndConnect(result);
+
                     Logger.LogMessage($"Server pinged. Attempt {i + 1} {(success ? "successful" : "failed")}.");
                 }
 
