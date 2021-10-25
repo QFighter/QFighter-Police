@@ -45,16 +45,15 @@ namespace QFighterPolice.Modules
         private bool TryConnect(JObject config, uint attempts = 5)
         {
             try
-            {
-                using var tcpClient = new TcpClient();
+            {                
                 bool success = false;
 
                 for (int i = 0; i < attempts && !success; i++)
                 {
+                    using var tcpClient = new TcpClient();
+
                     var result = tcpClient.BeginConnect((string)config["server_ip"], (int)config["server_port"], null, null);
                     success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(3));
-
-                    tcpClient.EndConnect(result);
 
                     Logger.LogMessage($"Server pinged. Attempt {i + 1} {(success ? "successful" : "failed")}.");
                 }
