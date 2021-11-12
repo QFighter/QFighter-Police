@@ -20,26 +20,33 @@ namespace QFighterPolice.Modules
 
         public async Task PingServerAsync(DiscordSocketClient client)
         {
-            JObject config = ConfigManager.GetConfig();
-
-            var guild = client.GetGuild((ulong)config["guild_id"]);
-            var channel = guild.GetTextChannel((ulong)config["server_status_channel"]);
-
-            bool success = TryConnect(config);
-
-            if (success && !_previousOnlineStatus)
-                await MessageManager.SendStatusUpdateMessageAsync(channel, success);
-            else if (!success && _previousOnlineStatus)
+            try
             {
-                await MessageManager.SendStatusUpdateMessageAsync(channel, success);
+                JObject config = ConfigManager.GetConfig();
 
-                var modChatMessage = (string)config["mod_chat_message"];
+                var guild = client.GetGuild((ulong)config["guild_id"]);
+                var channel = guild.GetTextChannel((ulong)config["server_status_channel"]);
 
-                if (!string.IsNullOrEmpty(modChatMessage) && guild.GetTextChannel((ulong)config["mod_chat"]) is SocketTextChannel modChat)
-                    await modChat.SendMessageAsync(modChatMessage);
+                bool success = TryConnect(config);
+
+                if (success && !_previousOnlineStatus)
+                    await MessageManager.SendStatusUpdateMessageAsync(channel, success);
+                else if (!success && _previousOnlineStatus)
+                {
+                    await MessageManager.SendStatusUpdateMessageAsync(channel, success);
+
+                    var modChatMessage = (string)config["mod_chat_message"];
+
+                    if (!string.IsNullOrEmpty(modChatMessage) && guild.GetTextChannel((ulong)config["mod_chat"]) is SocketTextChannel modChat)
+                        await modChat.SendMessageAsync(modChatMessage);
+                }
+
+                _previousOnlineStatus = success;
             }
-
-            _previousOnlineStatus = success;
+            catch (Exception e)
+            {
+                Logger.LogMessage($"Ping error: {e.Message}");
+            }            
         }
 
         private bool TryConnect(JObject config, uint attempts = 5)
